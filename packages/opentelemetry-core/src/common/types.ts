@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Exception } from '@opentelemetry/api';
+import { Attributes, Exception } from '@opentelemetry/api';
 
 /**
  * This interface defines a fallback to read a timeOrigin when it is not available on performance.timeOrigin,
@@ -60,6 +60,7 @@ export interface InstrumentationScope {
   readonly name: string;
   readonly version?: string;
   readonly schemaUrl?: string;
+  readonly attributes?: Attributes
 }
 
 /** Defines an error handler function */

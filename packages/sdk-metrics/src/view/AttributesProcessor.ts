@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Context, MetricAttributes } from '@opentelemetry/api';
+import { Attributes, Context } from '@opentelemetry/api';
 
 /**
  * The {@link AttributesProcessor} is responsible for customizing which
@@ -30,9 +30,9 @@ export abstract class AttributesProcessor {
    * `undefined` otherwise.
    */
   abstract process(
-    incoming: MetricAttributes,
+    incoming: Attributes,
     context?: Context
-  ): MetricAttributes;
+  ): Attributes;
 
   static Noop() {
     return NOOP;
@@ -40,7 +40,7 @@ export abstract class AttributesProcessor {
 }
 
 export class NoopAttributesProcessor extends AttributesProcessor {
-  process(incoming: MetricAttributes, _context?: Context) {
+  process(incoming: Attributes, _context?: Context) {
     return incoming;
   }
 }
@@ -54,8 +54,8 @@ export class FilteringAttributesProcessor extends AttributesProcessor {
     super();
   }
 
-  process(incoming: MetricAttributes, _context: Context): MetricAttributes {
-    const filteredAttributes: MetricAttributes = {};
+  process(incoming: Attributes, _context: Context): Attributes {
+    const filteredAttributes: Attributes = {};
     Object.keys(incoming)
       .filter(attributeName =>
         this._allowedAttributeNames.includes(attributeName)

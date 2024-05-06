@@ -77,6 +77,7 @@ export class MeterProvider implements IMeterProvider {
       name,
       version,
       schemaUrl: options.schemaUrl,
+      attributes: options.attributes,
     }).meter;
   }
 
